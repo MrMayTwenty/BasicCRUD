@@ -26,7 +26,9 @@ namespace BasicCRUD
 
         private void ResetAll()
         {
-            DataGridReset(dgContact);
+            flwContacts.Controls.Clear();
+            flwNumbers.Controls.Clear();
+            flwAddress.Controls.Clear();
         }
 
         private void DataGridReset(DataGridView dg) {
@@ -37,8 +39,8 @@ namespace BasicCRUD
         private void dgContact_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1) {
-                string conID = dgContact["dcContactID", e.RowIndex].Value.ToString();
-                LoadContactDetail(conID);
+                //string conID = dgContact["dcContactID", e.RowIndex].Value.ToString();
+                //LoadContactDetail(conID);
             }
         }
 
@@ -46,18 +48,23 @@ namespace BasicCRUD
         private void LoadContact()
         {
             DataTable dt = dao.GetContact();
-            int count = 0;
             foreach (DataRow dr in dt.Rows) {
-                dgContact.Rows.Add();
-                dgContact["dcContactID", count].Value = dr["ID"].ToString();
-                dgContact["dcContactFirstName", count].Value = dr["FirstName"].ToString();
-                dgContact["dcContactMiddleName", count].Value = dr["MiddleName"].ToString();
-                dgContact["dcContactLastName", count].Value = dr["LastName"].ToString();
-                count++;
+                CtrlContactName ctrlContact = new CtrlContactName();
+                ctrlContact.ID = Int64.Parse(dr["ID"].ToString());
+                ctrlContact.SurName = dr["LastName"].ToString();
+                ctrlContact.GivenName = dr["FirstName"].ToString() + " " + dr["MiddleName"].ToString();
+                ctrlContact.Click += CtrlContact_Click;
+                flwContacts.Controls.Add(ctrlContact);
             }
         }
 
-        private void LoadContactDetail(string ID)
+        private void CtrlContact_Click(object sender, EventArgs e)
+        {
+            CtrlContactName ctrl = (CtrlContactName)sender;
+            LoadContactDetail(ctrl.ID);
+        }
+
+        private void LoadContactDetail(Int64 ID)
         {
 
         }

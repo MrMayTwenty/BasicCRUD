@@ -47,6 +47,12 @@
   <ItemGroup>
     <Compile Include="Controller\DataAccess.cs" />
     <Compile Include="Controller\DatabaseController.cs" />
+    <Compile Include="CtrlContactName.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlContactName.Designer.cs">
+      <DependentUpon>CtrlContactName.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBasicCrud.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +61,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CtrlContactName.resx">
+      <DependentUpon>CtrlContactName.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBasicCrud.resx">
       <DependentUpon>frmBasicCrud.cs</DependentUpon>
     </EmbeddedResource>
